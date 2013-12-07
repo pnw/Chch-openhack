@@ -1,6 +1,7 @@
 import json
 import itertools
 import logging
+import os
 
 __author__ = 'patrickwalsh'
 
@@ -10,20 +11,22 @@ from redis import Redis
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
 
-redis = Redis()
+redis_url = os.environ.get('REDISTOGO_URL')
+
 
 
 IID_INDEX = 'index'
 
 @app.route('/')
 def hello():
-    return 'Hello World~!'
+    return os.environ.get('REDISTOGO_URL')
 
 @app.route('/intersections')
 def get_all_intersections():
     try:
         # nodes = redis.smembers(IID_INDEX)
         # all nodes are namespaced with iid
+        redis = Redis()
         nodes = redis.keys('iid:*')
         feed = itertools.imap(redis.hgetall, nodes)
         dehydrated = itertools.imap(dehydrate, feed)
