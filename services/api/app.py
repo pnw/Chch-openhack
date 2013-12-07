@@ -30,15 +30,11 @@ def get_all_intersections():
 
 
 def dehydrate(node):
-    keys = ['sid', 'iid', 'timestamp', 'lat', 'lon', 'osm_id', 'min_cong', 'max_cong', 'avg_cong']
-
+    keys = ['sid', 'id', 'updated_at', 'lat', 'lon', 'osm_id', 'min_cong', 'max_cong', 'avg_cong']
     data = {key: node.get(key, None) for key in keys}
 
-    # translate
-    data['id'] = data['iid']
-    del data['iid']
-
     return data
+
 
 if __name__ == '__main__':
     app.run()
