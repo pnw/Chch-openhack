@@ -46,6 +46,9 @@ def dehydrate(node):
 
 @app.route('/update_osm')
 def update_osm():
+    return update()
+
+def update():
     try:
         with open('export.geojson', 'w') as f:
             features = f['features']
