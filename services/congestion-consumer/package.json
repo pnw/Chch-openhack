@@ -1,0 +1,12 @@
+{
+  "name": "congestion-consumer",
+  "version": "0.1.0",
+  "description": "Consumes data from Chch TransIS push-service and pushes to redis.",
+  "main": "index.js",
+  "license": "PublicDomain",
+  "dependencies": {
+    "uuid": "~1.4.1",
+    "redis": "~0.9.1",
+    "sax": "~0.5.7"
+  }
+}
