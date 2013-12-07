@@ -6,7 +6,7 @@
   "license": "PublicDomain",
   "dependencies": {
     "uuid": "~1.4.1",
-    "redis": "~0.9.1",
-    "sax": "~0.5.7"
+    "sax": "~0.5.7",
+    "redis-url": "~0.2.0"
   }
 }

@@ -2,10 +2,9 @@ var http = require('http');
 var url = require('url');
 var sax = require('sax');
 var util = require('util');
-var redis = require("redis");
 var uuid = require('uuid');
+var redisClient = require('redis-url').connect(process.env.REDISTOGO_URL);
 
-var redisClient = redis.createClient(6379, '192.168.16.189');
 redisClient.on("error", function (err) {
     console.log("Error " + err);
 });
@@ -85,15 +84,3 @@ http.get('http://test:test@153.111.226.40:2412/transis/pushservice', function (r
   res.setEncoding('utf8');
   res.pipe(saxStream);
 });
-
-/*
-client.hset("hash key", "hashtest 1", "some value", redis.print);
-client.hset(["hash key", "hashtest 2", "some other value"], redis.print);
-client.hkeys("hash key", function (err, replies) {
-    console.log(replies.length + " replies:");
-    replies.forEach(function (reply, i) {
-        console.log("    " + i + ": " + reply);
-    });
-    client.quit();
-});
-*/
