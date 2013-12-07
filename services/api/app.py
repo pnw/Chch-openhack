@@ -18,8 +18,9 @@ IID_INDEX = 'index'
 @app.route('/intersections')
 def get_all_intersections():
     try:
-        nodes = redis.smembers(IID_INDEX)
-
+        # nodes = redis.smembers(IID_INDEX)
+        # all nodes are namespaced with iid
+        nodes = redis.keys('iid:*')
         feed = itertools.imap(redis.hgetall, nodes)
         dehydrated = itertools.imap(dehydrate, feed)
         return json.dumps(dict(
