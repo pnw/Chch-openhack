@@ -31,27 +31,7 @@ spoof = {
 ]}
 
 redis = Redis()
-logger = logging.getLogger(__name__)
 
-def main():
-    with open('export.geojson', 'w') as f:
-        features = f['features']
-        for feat in features:
-            osm_id = feat['id'].split('/')[1]
-            sid = feat['props']['chchsid']
-            lon, lat = feat['geometry']['coordinates']
-
-            assign(sid, lat=lat, lon=lon, osm_id=osm_id)
-
-def assign(sid, **mapping):
-    sid_key = 'sid:'+sid
-    iid_key = redis.get('sid:'+sid)
-    if not iid_key:
-        iid_key = 'iid:' + uuid.uuid4()
-        redis.set(sid_key, iid_key)
-
-    mapping.update(dict(sid=sid))
-    redis.hmset(iid_key, mapping)
 
 
 if __name__ == '__main__':
