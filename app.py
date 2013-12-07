@@ -46,14 +46,17 @@ def dehydrate(node):
 
 @app.route('/update_osm')
 def update_osm():
-    with open('export.geojson', 'w') as f:
-        features = f['features']
-        for feat in features:
-            osm_id = feat['id'].split('/')[1]
-            sid = feat['props']['chchsid']
-            lon, lat = feat['geometry']['coordinates']
+    try:
+        with open('export.geojson', 'w') as f:
+            features = f['features']
+            for feat in features:
+                osm_id = feat['id'].split('/')[1]
+                sid = feat['props']['chchsid']
+                lon, lat = feat['geometry']['coordinates']
 
-            assign(sid, lat=lat, lon=lon, osm_id=osm_id)
+                assign(sid, lat=lat, lon=lon, osm_id=osm_id)
+    except Exception as e:
+        logger.exception(e)
 
 def assign(sid, **mapping):
     sid_key = 'sid:'+sid
