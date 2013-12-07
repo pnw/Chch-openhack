@@ -15,6 +15,10 @@ redis = Redis()
 
 IID_INDEX = 'index'
 
+@app.route('/')
+def hello():
+    return 'Hello World~!'
+
 @app.route('/intersections')
 def get_all_intersections():
     try:
